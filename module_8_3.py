@@ -19,17 +19,20 @@ class Car:
             self.numbers = numbers
 
     def __is_valid_vin(self, vin_number):
-        if isinstance(vin_number, int) and  1000000 <= vin_number <= 9999999:
-            return True
-        else:
+        if not isinstance(vin_number, int):
             raise IncorrectVinNumber('Некорректный тип vin номер')
+        if not 1000000 <= vin_number <= 9999999:
+            raise IncorrectVinNumber('Неверный диапазон для vin номера')
+        else:
+            return True
 
     def __is_valid_numbers(self, numbers):
-        # print(type(numbers), len(numbers))
-        if isinstance(numbers, str) and len(numbers) == 6:
-            return True
+        if not isinstance(numbers, str):
+            raise IncorrectCarNumbers('Некорректный тип данных для номеров')
+        if not len(numbers) == 6:
+            raise IncorrectCarNumbers('Неверная длина номера')
         else:
-            raise IncorrectCarNumbers('Неверный диапазон для vin номера')
+            return True
 
 try:
   first = Car('Model1', 1000000, 'f123dj')
